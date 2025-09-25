@@ -15,7 +15,7 @@ namespace DICREP.EcommerceSubastas.API.Controllers
     public class NotifyAuctionResultController : ControllerBase
     {
         private readonly NotifyAuctionResultUseCase _notifyAuctionResultUseCase;
-        private readonly Serilog.ILogger _logger;
+        private readonly ILogger _logger;
 
         public NotifyAuctionResultController(NotifyAuctionResultUseCase notifyAuctionResultUseCase)
         {

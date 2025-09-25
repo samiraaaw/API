@@ -11,7 +11,7 @@ namespace DICREP.EcommerceSubastas.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [AllowAnonymous] 
     public class CuentaBancariaController : ControllerBase
     {
         private readonly CuentaBancariaUseCase _cuentaBancariaUseCase;

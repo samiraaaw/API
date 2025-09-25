@@ -8,6 +8,7 @@ using DICREP.EcommerceSubastas.Application.UseCases.Acceso;
 using DICREP.EcommerceSubastas.Application.UseCases.CLPrenda;
 using DICREP.EcommerceSubastas.Application.UseCases.CuentaBancaria;
 using DICREP.EcommerceSubastas.Application.UseCases.FichaProducto;
+using DICREP.EcommerceSubastas.Application.UseCases.Subasta;
 using DICREP.EcommerceSubastas.Infrastructure.Authorization;
 using DICREP.EcommerceSubastas.Infrastructure.Configurations;
 using DICREP.EcommerceSubastas.Infrastructure.Data.Repositories;
@@ -237,12 +238,18 @@ try
     builder.Services.AddScoped<CuentaBancariaUseCase>();
     builder.Services.AddScoped<CLPrendaUpdateUseCase>();
 
-        //Configurations
-        builder.Services.Configure<ApiBehaviorOptions>(options =>
+    // Repositorio de subasta
+    builder.Services.AddScoped<ISubastaRepository, SubastaRepository>();
+
+    // Use Case de subasta
+    builder.Services.AddScoped<ExtraccionSubastaUseCase>();
+
+
+    //Configurations
+    builder.Services.Configure<ApiBehaviorOptions>(options =>
     {
         options.SuppressModelStateInvalidFilter = true;
     });
-
 
 
     //Autenticación
@@ -251,9 +258,6 @@ try
         sp.GetRequiredService<IOptions<JwtSettings>>().Value);
     builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
     builder.Services.AddScoped<ValidateModelAttribute>();
-
-
-
 
 
     //Configuración de autorización por defecto
