@@ -5,6 +5,8 @@ using DICREP.EcommerceSubastas.Application.DTOs;
 using DICREP.EcommerceSubastas.Application.Interfaces;
 using DICREP.EcommerceSubastas.Application.Mappers;
 using DICREP.EcommerceSubastas.Application.UseCases.Acceso;
+using DICREP.EcommerceSubastas.Application.UseCases.CLPrenda;
+using DICREP.EcommerceSubastas.Application.UseCases.CuentaBancaria;
 using DICREP.EcommerceSubastas.Application.UseCases.FichaProducto;
 using DICREP.EcommerceSubastas.Infrastructure.Authorization;
 using DICREP.EcommerceSubastas.Infrastructure.Configurations;
@@ -227,9 +229,16 @@ try
     builder.Services.AddScoped<IClAuctionApiService, ClAuctionApiService>();
     builder.Services.AddScoped<NotifyAuctionResultUseCase>();
 
+    // Repositorios adicionales
+    builder.Services.AddScoped<ICuentaBancariaRepository, CuentaBancariaRepository>();
+    builder.Services.AddScoped<ICLPrendaRepository, CLPrendaRepository>();
 
-    //Configurations
-    builder.Services.Configure<ApiBehaviorOptions>(options =>
+    // Use Cases adicionales
+    builder.Services.AddScoped<CuentaBancariaUseCase>();
+    builder.Services.AddScoped<CLPrendaUpdateUseCase>();
+
+        //Configurations
+        builder.Services.Configure<ApiBehaviorOptions>(options =>
     {
         options.SuppressModelStateInvalidFilter = true;
     });
